@@ -14,7 +14,7 @@ public class Genero {
 
     public boolean inserir(Genero genero) {
         try (
-            FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\trab poo\\bd\\genero.txt", true);
+            FileWriter fw = new FileWriter("\\bd\\genero.txt", true);
             BufferedWriter writer = new BufferedWriter(fw)) {
             writer.write(genero.getId()+ ";" + genero.getDesc() + ";" + genero.getStatus());
             writer.newLine();
@@ -25,7 +25,7 @@ public class Genero {
         }
     }
 
-    public static ArrayList<Genero> listar() {
+    public ArrayList<Genero> listar() {
         ArrayList<Genero> generos = new ArrayList<>();
         try (
             FileReader fr = new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\trab poo\\bd\\genero.txt");
