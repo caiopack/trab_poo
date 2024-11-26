@@ -1,3 +1,9 @@
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class FilmeAtor {
     private int Idfilme;
     private Ator ator;
@@ -12,6 +18,14 @@ public class FilmeAtor {
         this.filme = filme;
         this.personagem = personagem;
         this.principal = principal;
+    }
+
+    public boolean cadastrar(FilmeAtor filmeAtor){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\filmeator.txt", true)))  {
+            writer.write(filme.getIdFilme() + ";" + filme)  ;
+            
+        } catch (Exception e) {
+        }
     }
     public int getIdfilme() {
         return Idfilme;

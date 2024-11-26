@@ -18,7 +18,7 @@ public class Ator extends Pessoa {
     }
 
     public boolean cadastrar(Ator ator) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\trab poo\\bd\\genero.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("\\bd\\genero.txt", true))) {
             writer.write(ator.getRegistro() + ";" + ator.getCpf() + ";" + ator.getNome() + ";" + ator.getEmail() + "\n");
             return true;
         } catch (IOException e) {
@@ -32,7 +32,7 @@ public class Ator extends Pessoa {
         boolean encontrado = false;
 
         try (
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\trab poo\\bd\\genero.txt"))) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("\\bd\\ator.txt"))) {
             for (Ator a : atores) {
                 if (a.getRegistro() == ator.getRegistro()) {
                     writer.write(ator.getRegistro() + ";" + ator.getCpf() + ";" + ator.getNome() + ";" + ator.getEmail() + "\n");
@@ -64,7 +64,7 @@ public class Ator extends Pessoa {
     public ArrayList<Ator> listar() {
         ArrayList<Ator> atores = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\trab poo\\bd\\genero.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("\\bd\\genero.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
