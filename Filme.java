@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Filme {
@@ -17,8 +21,10 @@ public class Filme {
     }
 
     public boolean cadastrar(Filme filme) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("\\bd\\filme.txt", true))) {
-            writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() +  ";" + filme.getStatus() + "\n");
+        try (
+            FileWriter fw = new FileWriter("bd\\filme.txt", true);
+            BufferedWriter writer = new BufferedWriter(fw)) {
+            writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() + ";" +  filme.getStatus() + "\n");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,7 +36,7 @@ public class Filme {
        ArrayList<Filme> filmes = listar();
        boolean encontrado = false;
 
-       try (BufferedWriter writer = new BufferedWriter(new FileWriter("\\bd\\filme.txt"))) {
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\filme.txt"))) {
            for(Filme f : filmes){
             if(f.getIdFilme() == filme.getIdFilme()){
                 writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() +  ";" + filme.getStatus() + "\n");
@@ -61,10 +67,9 @@ public class Filme {
     public ArrayList<Filme> listar() {
         ArrayList<Filme> filmes = new ArrayList<>();
     
-        // Instância de Genero para consultar gêneros
-        Genero generoObj = new Genero(idFilme, titulo, status);
+        Genero genero1 = new Genero(0, "", "");
     
-        try (BufferedReader reader = new BufferedReader(new FileReader("\\bd\\filme.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("bd\\filme.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
@@ -74,8 +79,8 @@ public class Filme {
                 String descGenero = dados[3];
                 String status = dados[4];
     
-                // Consultando o gênero a partir da descrição
-                Genero genero = generoObj.consultar(descGenero);
+                
+                Genero genero = genero1.consultar(descGenero);
     
                 if (genero != null) {
                     filmes.add(new Filme(idFilme, titulo, classificacao, genero, status));

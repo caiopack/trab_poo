@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Genero {
@@ -52,6 +56,14 @@ public class Genero {
         }
         return null;
     }
+
+    
+
+    @Override
+    public String toString() {
+        return desc; 
+    }
+
 
     public boolean editar(int id, String novaDesc, String novoStatus) {
         ArrayList<Genero> generos = listar();

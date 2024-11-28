@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Ator extends Pessoa {
@@ -18,7 +22,9 @@ public class Ator extends Pessoa {
     }
 
     public boolean cadastrar(Ator ator) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("\\bd\\genero.txt", true))) {
+        try (
+            FileWriter fw = new FileWriter("bd\\ator.txt", true);
+            BufferedWriter writer = new BufferedWriter(fw)) {
             writer.write(ator.getRegistro() + ";" + ator.getCpf() + ";" + ator.getNome() + ";" + ator.getEmail() + "\n");
             return true;
         } catch (IOException e) {
@@ -32,7 +38,7 @@ public class Ator extends Pessoa {
         boolean encontrado = false;
 
         try (
-            BufferedWriter writer = new BufferedWriter(new FileWriter("\\bd\\ator.txt"))) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\ator.txt"))) {
             for (Ator a : atores) {
                 if (a.getRegistro() == ator.getRegistro()) {
                     writer.write(ator.getRegistro() + ";" + ator.getCpf() + ";" + ator.getNome() + ";" + ator.getEmail() + "\n");
@@ -61,10 +67,15 @@ public class Ator extends Pessoa {
         return null; 
     }
 
+    @Override
+    public String toString() {
+		return getRegistro() + ";" + getCpf() + ";" + getNome() + ";" + getEmail();
+	}
+
     public ArrayList<Ator> listar() {
         ArrayList<Ator> atores = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("\\bd\\genero.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("bd\\ator.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");

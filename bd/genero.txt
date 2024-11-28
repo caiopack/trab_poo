@@ -1,3 +1,0 @@
-1;acao;A
-2;Acao;A
-3;Guerra;A
