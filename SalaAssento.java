@@ -17,7 +17,7 @@ public class SalaAssento {
     }
 
     public boolean cadastrar(SalaAssento salaAssento) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//salaAssento.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\SalaAssento.java", true))) {
             writer.write(salaAssento.getIdSalaAssento() + ";" + salaAssento.getAssento().getIdAssento() + ";" + salaAssento.getSala().getIdSala());
             writer.newLine();
             return true;
@@ -27,9 +27,15 @@ public class SalaAssento {
         }
     }
 
+    @Override
+public String toString() {
+    return "SalaAssento{idSalaAssento=" + idSalaAssento + ", idAssento=" + assento.getIdAssento() + ", idSala=" + sala.getIdSala() + "}";
+}
+
+
     public ArrayList<SalaAssento> listar() {
         ArrayList<SalaAssento> salaAssentos = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd//salaAssento.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\SalaAssento.java"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
@@ -37,7 +43,7 @@ public class SalaAssento {
                 int idAssento = Integer.parseInt(dados[1]);
                 int idSala = Integer.parseInt(dados[2]);
 
-                // Criando instâncias para Assento e Sala
+               
                 TipoAssento tipoAssento = new TipoAssento(0, "", "Ativo"); 
                 Assento assento = new Assento(idAssento, tipoAssento);
                 Sala sala = new Sala(idSala, 0, "", "Ativo");
@@ -73,7 +79,7 @@ public class SalaAssento {
         }
 
         if (encontrado) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//salaAssento.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\SalaAssento.java"))) {
                 for (SalaAssento sa : salaAssentos) {
                     writer.write(sa.getIdSalaAssento() + ";" + sa.getAssento().getIdAssento() + ";" + sa.getSala().getIdSala());
                     writer.newLine();

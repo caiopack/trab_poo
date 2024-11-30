@@ -18,10 +18,8 @@ public class Ingresso {
         this.sessao = sessao;
     }
      public boolean cadastrar(Ingresso ingresso) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//ingresso.txt", true))) {
-            writer.write(ingresso.getIdIngresso() + ";" +
-                         ingresso.getValorPago() + ";" +
-                         ingresso.getSalaAssento().getIdSalaAssento() + ";" +
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\ingresso.txt", true))) {
+            writer.write(ingresso.getIdIngresso() + ";" + ingresso.getValorPago() + ";" + ingresso.getSalaAssento().getIdSalaAssento() + ";" +
                          ingresso.getSessao().getIdSessao());
             writer.newLine();
             return true;
@@ -31,9 +29,16 @@ public class Ingresso {
         }
     }
 
+    @Override
+public String toString() {
+    return "Ingresso{idIngresso=" + idIngresso + ", valorPago=" + valorPago + ", SalaAssentoID=" + SalaAssento.getIdSalaAssento() + 
+            ", SessaoID=" + sessao.getIdSessao() + '}';
+}
+
+
     public ArrayList<Ingresso> listar() {
         ArrayList<Ingresso> ingressos = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd/ingresso.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\ingresso.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
@@ -78,7 +83,7 @@ public class Ingresso {
         }
 
         if (encontrado) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//ingresso.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\ingresso.txt"))) {
                 for (Ingresso i : ingressos) {
                     writer.write(i.getIdIngresso() + ";" + i.getValorPago() + ";" + i.getSalaAssento().getIdSalaAssento() + ";" + i.getSessao().getIdSessao());
                     writer.newLine();

@@ -19,7 +19,7 @@ public class Sala {
     }
 
     public boolean cadastrar(Sala sala) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//sala.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sala.txt", true))) {
             writer.write(sala.getIdSala() + ";" + sala.getCapacidadeSala() + ";" + sala.getDescricao() + ";" + sala.getStatus());
             writer.newLine();
             return true;
@@ -29,9 +29,15 @@ public class Sala {
         }
     }
 
+    @Override
+    public String toString() {
+    return "Sala{idSala=" + idSala + ", capacidadeSala=" + capacidadeSala + ", descricao='" + descricao + "', status='" + status + "'}";
+}
+
+
     public ArrayList<Sala> listar() {
         ArrayList<Sala> salas = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd//sala.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sala.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
@@ -61,7 +67,7 @@ public class Sala {
     public boolean editar(int idSala, int novaCapacidade, String novaDescricao, String novoStatus) {
         ArrayList<Sala> salas = listar();
         boolean encontrado = false;
-
+    
         for (Sala sala : salas) {
             if (sala.getIdSala() == idSala) {
                 sala.setCapacidadeSala(novaCapacidade);
@@ -71,9 +77,9 @@ public class Sala {
                 break;
             }
         }
-
+    
         if (encontrado) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//sala.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sala.txt"))) {
                 for (Sala sala : salas) {
                     writer.write(sala.getIdSala() + ";" + sala.getCapacidadeSala() + ";" + sala.getDescricao() + ";" + sala.getStatus());
                     writer.newLine();
@@ -85,7 +91,7 @@ public class Sala {
         }
         return false;
     }
-
+    
 
     public int getIdSala() {
         return idSala;

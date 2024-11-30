@@ -25,7 +25,7 @@ public class Sessao {
     }
 
     public boolean cadastrar(Sessao sessao) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//sessao.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sessao.txt", true))) {
             writer.write(sessao.getIdSessao() + ";" + sessao.getDataHoraSessao().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ";" + 
                          sessao.getFilme().getIdFilme() + ";" + sessao.getSala().getIdSala() + ";" + sessao.getFuncionario().getMatricula() + ";" + sessao.getStatus());
             writer.newLine();
@@ -36,10 +36,16 @@ public class Sessao {
         }
     }
 
+    @Override
+    public String toString() {
+    return "Sessao{idSessao=" + idSessao + ", dataHoraSessao=" + dataHoraSessao + ", filme=" + filme + ", sala=" + sala + ", funcionario=" + funcionario + ", status='" + status + "'}";
+}
+
+
 
     public ArrayList<Sessao> listar() {
         ArrayList<Sessao> sessoes = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd//sessao.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sessao.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
@@ -89,7 +95,7 @@ public class Sessao {
         }
 
         if (encontrado) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//sessao.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sessao.txt"))) {
                 for (Sessao s : sessoes) {
                     writer.write(s.getIdSessao() + ";" + s.getDataHoraSessao().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ";" + 
                                  s.getFilme().getIdFilme() + ";" + 

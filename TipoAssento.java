@@ -13,7 +13,7 @@ public class TipoAssento {
     }
 
     public boolean cadastrar(TipoAssento tipoAssento) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//tipoassento.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\tipoassento.txt", true))) {
             writer.write(tipoAssento.getIdTipoAssento() + ";" + tipoAssento.getDescricao() + ";" + tipoAssento.getStatus());
             writer.newLine();
             return true;
@@ -23,9 +23,15 @@ public class TipoAssento {
         }
     }
 
+    @Override
+    public String toString() {
+    return "TipoAssento{idTipoAssento=" + idTipoAssento + ", descricao='" + descricao + "', status='" + status + "'}";
+}
+
+
     public ArrayList<TipoAssento> listar() {
         ArrayList<TipoAssento> tipoAssentos = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd//tipoassento.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\tipoassento.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
@@ -64,7 +70,7 @@ public class TipoAssento {
         }
 
         if (encontrado) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd//tipoassento.txt"))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\tipoassento.txt"))) {
                 for (TipoAssento ta : tipoAssentos) {
                     writer.write(ta.getIdTipoAssento() + ";" + ta.getDescricao() + ";" + ta.getStatus());
                     writer.newLine();

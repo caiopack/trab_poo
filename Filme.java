@@ -22,7 +22,7 @@ public class Filme {
 
     public boolean cadastrar(Filme filme) {
         try (
-            FileWriter fw = new FileWriter("bd\\filme.txt", true);
+            FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filme.txt", true);
             BufferedWriter writer = new BufferedWriter(fw)) {
             writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() + ";" +  filme.getStatus() + "\n");
             return true;
@@ -32,11 +32,17 @@ public class Filme {
         }
     }
 
+    @Override
+public String toString() {
+    return "Filme{idFilme=" + idFilme + ", titulo='" + titulo + "', classificacao=" + classificacao + ", genero=" + genero + ", status='" + status + "'}";
+}
+
+
     public boolean editar(Filme filme){
        ArrayList<Filme> filmes = listar();
        boolean encontrado = false;
 
-       try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\filme.txt"))) {
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filme.txt"))) {
            for(Filme f : filmes){
             if(f.getIdFilme() == filme.getIdFilme()){
                 writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() +  ";" + filme.getStatus() + "\n");
@@ -69,7 +75,7 @@ public class Filme {
     
         Genero genero1 = new Genero(0, "", "");
     
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd\\filme.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filme.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");

@@ -33,12 +33,8 @@ public class Funcionario extends Pessoa {
     }
 
     public boolean cadastrar() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\funcionario.txt", true))) {
-            writer.write(this.getMatricula() + "; " +
-                         this.getCpf() + "; " +
-                         this.getNome() + "; " +
-                         this.getEmail() + "; " +
-                         this.getHorarioTrabalho());
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\funcionario.txt", true))) {
+            writer.write(this.getMatricula() + "; " + this.getCpf() + "; " + this.getNome() + "; " + this.getEmail() + "; " + this.getHorarioTrabalho());
             writer.newLine();
             return true;
         } catch (IOException e) {
@@ -47,11 +43,18 @@ public class Funcionario extends Pessoa {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Funcionario{matricula=" + matricula + ", cpf='" + getCpf() + "', nome='" + getNome() + "', email='" + getEmail() + "', horarioTrabalho=" + horarioTrabalho + "}";
+    }
+    
+
+
   
     public ArrayList<Funcionario> listar() {
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         try (
-            FileReader fr = new FileReader("bd\\funcionario.txt");
+            FileReader fr = new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\funcionario.txt");
             BufferedReader reader = new BufferedReader(fr)) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -96,7 +99,7 @@ public class Funcionario extends Pessoa {
 
         if (encontrado) {
             try (
-                FileWriter fw = new FileWriter("bd\\funcionario.txt");
+                FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\funcionario.txt");
                 BufferedWriter writer = new BufferedWriter(fw)) {
                 for (Funcionario funcionario : funcionarios) {
                     writer.write(funcionario.getMatricula() + ";" + funcionario.getCpf() + ";" + funcionario.getNome() + ";" + funcionario.getEmail() + ";" + funcionario.getHorarioTrabalho());

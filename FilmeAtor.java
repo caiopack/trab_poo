@@ -23,7 +23,7 @@ public class FilmeAtor {
     }
 
     public boolean cadastrar(FilmeAtor filmeAtor) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\filmeator.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filmeator.txt", true))) {
             writer.write(filmeAtor.getIdFilmeAtor() + ";" + filmeAtor.getAtor().getRegistro() + ";" + filmeAtor.getFilme().getIdFilme() + ";" + filmeAtor.getPersonagem() + ";" +
                 filmeAtor.isPrincipal() + "\n"
             );
@@ -34,11 +34,17 @@ public class FilmeAtor {
         }
     }
 
+    @Override
+    public String toString() {
+    return "FilmeAtor{idFilmeAtor=" + idFilmeAtor + ", ator=" + ator.getRegistro() + ", filme=" + filme.getIdFilme() + 
+            ", personagem='" + personagem +  ", principal=" + principal + '}';
+}
+
      public boolean editar(FilmeAtor filmeAtor) {
         ArrayList<FilmeAtor> lista = listar();
         boolean encontrado = false;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\filmeator.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filmeator.txt"))) {
             for (FilmeAtor fa : lista) {
                 if (fa.getIdFilmeAtor() == filmeAtor.getIdFilmeAtor()) {
                     writer.write(filmeAtor.getIdFilmeAtor() + ";" + filmeAtor.getAtor().getRegistro() + ";" + filmeAtor.getFilme().getIdFilme() + ";" + filmeAtor.getPersonagem() + ";" + filmeAtor.isPrincipal() + "\n"
@@ -68,10 +74,10 @@ public class FilmeAtor {
 
     public ArrayList<FilmeAtor> listar() {
         ArrayList<FilmeAtor> filmeAtores = new ArrayList<>();
-        Ator atorHandler = new Ator(null, null, null, 0); // Ajuste conforme o construtor da classe Ator
+        Ator atorHandler = new Ator(null, null, null, 0); 
         Filme filmeHandler = new Filme(0, null, 0, null, null);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd\\filmeator.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filmeator.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");

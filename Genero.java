@@ -18,7 +18,7 @@ public class Genero {
 
     public boolean inserir(Genero genero) {
         try (
-            FileWriter fw = new FileWriter("bd\\genero.txt", true);
+            FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\genero.txt", true);
             BufferedWriter writer = new BufferedWriter(fw)) {
             writer.write(genero.getId()+ ";" + genero.getDesc() + ";" + genero.getStatus());
             writer.newLine();
@@ -32,7 +32,7 @@ public class Genero {
     public ArrayList<Genero> listar() {
         ArrayList<Genero> generos = new ArrayList<>();
         try (
-            FileReader fr = new FileReader("bd\\genero.txt");
+            FileReader fr = new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\genero.txt");
             BufferedReader reader = new BufferedReader(fr)) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -60,9 +60,10 @@ public class Genero {
     
 
     @Override
-    public String toString() {
-        return desc; 
-    }
+public String toString() {
+    return "Genero{id=" + id + ", descricao='" + desc + "', status='" + status + "'}";
+}
+
 
 
     public boolean editar(int id, String novaDesc, String novoStatus) {
@@ -80,7 +81,7 @@ public class Genero {
 
         if (encontrado) {
             try (
-                FileWriter fw = new FileWriter("bd\\genero.txt");
+                FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\genero.txt");
                 BufferedWriter writer = new BufferedWriter(fw)) {
                 for (Genero genero : generos) {
                     writer.write(genero.id + ";" + genero.desc + ";" + genero.status);

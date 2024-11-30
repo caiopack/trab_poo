@@ -23,7 +23,7 @@ public class Ator extends Pessoa {
 
     public boolean cadastrar(Ator ator) {
         try (
-            FileWriter fw = new FileWriter("bd\\ator.txt", true);
+            FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\ator.txt", true);
             BufferedWriter writer = new BufferedWriter(fw)) {
             writer.write(ator.getRegistro() + ";" + ator.getCpf() + ";" + ator.getNome() + ";" + ator.getEmail() + "\n");
             return true;
@@ -33,12 +33,14 @@ public class Ator extends Pessoa {
         }
     }
 
+    
+
     public boolean editar(Ator ator) {
         ArrayList<Ator> atores = listar();
         boolean encontrado = false;
 
         try (
-            BufferedWriter writer = new BufferedWriter(new FileWriter("bd\\ator.txt"))) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\ator.txt"))) {
             for (Ator a : atores) {
                 if (a.getRegistro() == ator.getRegistro()) {
                     writer.write(ator.getRegistro() + ";" + ator.getCpf() + ";" + ator.getNome() + ";" + ator.getEmail() + "\n");
@@ -68,14 +70,14 @@ public class Ator extends Pessoa {
     }
 
     @Override
-    public String toString() {
-		return getRegistro() + ";" + getCpf() + ";" + getNome() + ";" + getEmail();
-	}
+public String toString() {
+    return "Ator{registro=" + registro + ", nome='" + getNome() + "', email='" + getEmail() + "', cpf='" + getCpf() + "'}";
+}
 
     public ArrayList<Ator> listar() {
         ArrayList<Ator> atores = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("bd\\ator.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\ator.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
