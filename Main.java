@@ -26,7 +26,7 @@ public class Main {
                 case 5 -> gerenciarAssento(scanner);
                 case 6 -> gerenciarTipoAssento(scanner);
                 case 7 -> running = false;
-                default -> System.out.println("Opção inválida! Tente novamente.");
+                default -> System.out.println("Opção inválida.");
             }
         }
         scanner.close();
@@ -35,7 +35,7 @@ public class Main {
         boolean generoMenu = true;
         while (generoMenu) {
             System.out.println("\nGerenciamento de Gêneros:");
-            System.out.println("1. Inserir Gênero");
+            System.out.println("1. Cadastrar Gênero");
             System.out.println("2. Listar Gêneros");
             System.out.println("3. Consultar Gênero");
             System.out.println("4. Editar Gênero");
@@ -99,7 +99,7 @@ public class Main {
                     }
                 }
                 case 5 -> generoMenu = false;
-                default -> System.out.println("Opção inválida! Tente novamente.");
+                default -> System.out.println("Opção inválida.");
             }
         }
     }
@@ -108,7 +108,7 @@ public class Main {
         boolean filmeMenu = true;
         while (filmeMenu) {
             System.out.println("\nGerenciamento de Filmes:");
-            System.out.println("1. Inserir Filme");
+            System.out.println("1. Cadastrar Filme");
             System.out.println("2. Listar Filmes");
             System.out.println("3. Consultar Filme");
             System.out.println("4. Editar Filme");
@@ -205,7 +205,7 @@ public class Main {
         boolean atorMenu = true;
         while (atorMenu) {
             System.out.println("\nGerenciamento de Atores:");
-            System.out.println("1. Inserir Ator");
+            System.out.println("1. Cadastrar Ator");
             System.out.println("2. Listar Atores");
             System.out.println("3. Consultar Ator");
             System.out.println("4. Editar Ator");
@@ -290,7 +290,7 @@ public class Main {
         boolean salaMenu = true;
         while (salaMenu) {
             System.out.println("\nGerenciamento de Salas:");
-            System.out.println("1. Inserir Sala");
+            System.out.println("1. Cadastrar Sala");
             System.out.println("2. Listar Salas");
             System.out.println("3. Consultar Sala");
             System.out.println("4. Editar Sala");
@@ -376,7 +376,7 @@ public class Main {
         boolean assentoMenu = true;
         while (assentoMenu) {
             System.out.println("\nGerenciamento de Assentos:");
-            System.out.println("1. Inserir Assento");
+            System.out.println("1. Cadastrar Assento");
             System.out.println("2. Listar Assentos");
             System.out.println("3. Consultar Assento");
             System.out.println("4. Editar Assento");
@@ -471,7 +471,7 @@ public class Main {
             System.out.println("5. Voltar");
             System.out.print("Escolha uma opção: ");
             int tipoAssentoOption = scanner.nextInt();
-            scanner.nextLine(); // Limpa o buffer
+            scanner.nextLine(); 
     
             TipoAssento tipoAssentoHandler = new TipoAssento(0, "", "");
     
