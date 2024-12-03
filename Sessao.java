@@ -26,7 +26,7 @@ public class Sessao {
 
     public boolean cadastrar(Sessao sessao) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sessao.txt", true))) {
-            writer.write(sessao.getIdSessao() + ";" + sessao.getDataHoraSessao().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ";" + 
+            writer.write(sessao.getIdSessao() + ";" + sessao.getDataHoraSessao().format(DateTimeFormatter.ofPattern("dd/MM HH:mm")) + ";" + 
                          sessao.getFilme().getIdFilme() + ";" + sessao.getSala().getIdSala() + ";" + sessao.getFuncionario().getMatricula() + ";" + sessao.getStatus());
             writer.newLine();
             return true;
@@ -38,10 +38,8 @@ public class Sessao {
 
     @Override
     public String toString() {
-    return "Sessao{idSessao=" + idSessao + ", dataHoraSessao=" + dataHoraSessao + ", filme=" + filme + ", sala=" + sala + ", funcionario=" + funcionario + ", status='" + status + "'}";
-}
-
-
+        return "Sessao{idSessao=" + idSessao + ", dataHoraSessao=" + dataHoraSessao + ", filme=" + filme + ", sala=" + sala + ", funcionario=" + funcionario + ", status='" + status + "'}";
+    }
 
     public ArrayList<Sessao> listar() {
         ArrayList<Sessao> sessoes = new ArrayList<>();
@@ -50,13 +48,12 @@ public class Sessao {
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(";");
                 int idSessao = Integer.parseInt(dados[0]);
-                LocalDateTime dataHoraSessao = LocalDateTime.parse(dados[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDateTime dataHoraSessao = LocalDateTime.parse(dados[1], DateTimeFormatter.ofPattern("dd/MM HH:mm"));
                 int idFilme = Integer.parseInt(dados[2]);
                 int idSala = Integer.parseInt(dados[3]);
                 int matriculaFuncionario = Integer.parseInt(dados[4]);
                 String status = dados[5];
 
-                
                 Filme filme = new Filme(idFilme, null, 0, null, null);
                 Sala sala = new Sala(idSala, 0, null, null);
                 Funcionario funcionario = new Funcionario(null, null, null, matriculaFuncionario, null);
@@ -97,9 +94,8 @@ public class Sessao {
         if (encontrado) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\sessao.txt"))) {
                 for (Sessao s : sessoes) {
-                    writer.write(s.getIdSessao() + ";" + s.getDataHoraSessao().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ";" + 
-                                 s.getFilme().getIdFilme() + ";" + 
-                                 s.getSala().getIdSala() + ";" + s.getFuncionario().getMatricula() + ";" + s.getStatus());
+                    writer.write(s.getIdSessao() + ";" + s.getDataHoraSessao().format(DateTimeFormatter.ofPattern("dd/MM HH:mm")) + ";" + 
+                                 s.getFilme().getIdFilme() + ";" + s.getSala().getIdSala() + ";" + s.getFuncionario().getMatricula() + ";" + s.getStatus());
                     writer.newLine();
                 }
                 return true;

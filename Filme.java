@@ -24,7 +24,7 @@ public class Filme {
         try (
             FileWriter fw = new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filme.txt", true);
             BufferedWriter writer = new BufferedWriter(fw)) {
-            writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() + ";" +  filme.getStatus() + "\n");
+            writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero().getDesc() + ";" +  filme.getStatus() + "\n");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,10 +33,9 @@ public class Filme {
     }
 
     @Override
-public String toString() {
-    return "Filme{idFilme=" + idFilme + ", titulo='" + titulo + "', classificacao=" + classificacao + ", genero=" + genero + ", status='" + status + "'}";
-}
-
+    public String toString() {
+        return "Descrição: " + genero.getDesc() + ", Status: " + status;
+    }
 
     public boolean editar(Filme filme){
        ArrayList<Filme> filmes = listar();
@@ -45,10 +44,10 @@ public String toString() {
        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filme.txt"))) {
            for(Filme f : filmes){
             if(f.getIdFilme() == filme.getIdFilme()){
-                writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero() +  ";" + filme.getStatus() + "\n");
+                writer.write(filme.getIdFilme() + ";" + filme.getTitulo() + ";" + filme.getClassificacao() + ";" + filme.getGenero().getDesc() +  ";" + filme.getStatus() + "\n");
                 encontrado = true;
             } else {
-                writer.write(f.getIdFilme() + ";" + f.getTitulo() + ";" + f.getClassificacao() + ";" + f.getGenero() +  ";" + f.getStatus() + "\n");
+                writer.write(f.getIdFilme() + ";" + f.getTitulo() + ";" + f.getClassificacao() + ";" + f.getGenero().getDesc() +  ";" + f.getStatus() + "\n");
             }
            }
        } catch (Exception e) {
@@ -73,7 +72,7 @@ public String toString() {
     public ArrayList<Filme> listar() {
         ArrayList<Filme> filmes = new ArrayList<>();
     
-        Genero genero1 = new Genero(0, "", "");
+        Genero genero1 = new Genero(0, "", ""); 
     
         try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\ccaio\\OneDrive\\Área de Trabalho\\cinema\\trab_poo\\bd\\filme.txt"))) {
             String linha;
@@ -82,10 +81,9 @@ public String toString() {
                 int idFilme = Integer.parseInt(dados[0]);
                 String titulo = dados[1];
                 int classificacao = Integer.parseInt(dados[2]);
-                String descGenero = dados[3];
+                String descGenero = dados[3];  
                 String status = dados[4];
     
-                
                 Genero genero = genero1.consultar(descGenero);
     
                 if (genero != null) {
@@ -100,7 +98,6 @@ public String toString() {
     
         return filmes;
     }
-    
 
     public int getIdFilme() {
         return idFilme;
@@ -141,7 +138,4 @@ public String toString() {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    
-
 }

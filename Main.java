@@ -10,36 +10,25 @@ public class Main {
             System.out.println("1. Gerenciar Gêneros");
             System.out.println("2. Gerenciar Filmes");
             System.out.println("3. Gerenciar Atores");
-            System.out.println("4. Gerenciar Salas");  
-            System.out.println("5. Sair");
+            System.out.println("4. Gerenciar Salas");
+            System.out.println("5. Gerenciar Assentos");
+            System.out.println("6. Sair");
             System.out.print("Escolha uma opção: ");
             int menuOption = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             switch (menuOption) {
-                case 1:
-                    gerenciarGenero(scanner);
-                    break;
-                case 2:
-                    gerenciarFilme(scanner);
-                    break;
-                case 3:
-                    gerenciarAtor(scanner);
-                    break;
-                case 4:
-                    gerenciarSala(scanner);  
-                    break;
-                case 5:
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Opção inválida! Tente novamente.");
+                case 1 -> gerenciarGenero(scanner);
+                case 2 -> gerenciarFilme(scanner);
+                case 3 -> gerenciarAtor(scanner);
+                case 4 -> gerenciarSala(scanner);
+                case 5 -> gerenciarAssento(scanner);
+                case 6 -> running = false;
+                default -> System.out.println("Opção inválida! Tente novamente.");
             }
         }
-
         scanner.close();
     }
-
     private static void gerenciarGenero(Scanner scanner) {
         boolean generoMenu = true;
         while (generoMenu) {
@@ -164,10 +153,8 @@ public class Main {
                 case 2 -> {
                     System.out.println("\nLista de Filmes:");
                     for (Filme f : filmeHandler.listar()) {
-                        System.out.println("ID: " + f.getIdFilme() + ", Título: " + f.getTitulo() +
-                                ", Classificação: " + f.getClassificacao() +
-                                ", Gênero: " + f.getGenero().getDesc() +
-                                ", Status: " + f.getStatus());
+                        System.out.println("ID: " + f.getIdFilme() + ", Título: " + f.getTitulo() + ", Classificação: " + f.getClassificacao() +
+                                ", Gênero: " + f.getGenero().getDesc() + ", Status: " + f.getStatus());
                     }
                 }
                 case 3 -> {
@@ -178,10 +165,8 @@ public class Main {
                     Filme filme = filmeHandler.consultar(idFilme);
 
                     if (filme != null) {
-                        System.out.println("ID: " + filme.getIdFilme() + ", Título: " + filme.getTitulo() +
-                                ", Classificação: " + filme.getClassificacao() +
-                                ", Gênero: " + filme.getGenero().getDesc() +
-                                ", Status: " + filme.getStatus());
+                        System.out.println("ID: " + filme.getIdFilme() + ", Título: " + filme.getTitulo() + ", Classificação: " + filme.getClassificacao() +
+                                ", Gênero: " + filme.getGenero().getDesc() +", Status: " + filme.getStatus());
                     } else {
                         System.out.println("Filme não encontrado.");
                     }
@@ -385,4 +370,93 @@ public class Main {
             }
         }
     }
+    private static void gerenciarAssento(Scanner scanner) {
+        boolean assentoMenu = true;
+        while (assentoMenu) {
+            System.out.println("\nGerenciamento de Assentos:");
+            System.out.println("1. Inserir Assento");
+            System.out.println("2. Listar Assentos");
+            System.out.println("3. Consultar Assento");
+            System.out.println("4. Editar Assento");
+            System.out.println("5. Voltar");
+            System.out.print("Escolha uma opção: ");
+            int assentoOption = scanner.nextInt();
+            scanner.nextLine(); 
+    
+            Assento assentoHandler = new Assento(0, new TipoAssento(0, "", ""));
+            
+            switch (assentoOption) {
+                case 1 -> {
+                    System.out.print("ID do Assento: ");
+                    int idAssento = scanner.nextInt();
+                    scanner.nextLine();
+    
+                    System.out.print("Descrição do Tipo de Assento: ");
+                    String descricaoTipoAssento = scanner.nextLine();
+    
+                    System.out.print("Status do Tipo de Assento: ");
+                    String statusTipoAssento = scanner.nextLine();
+    
+                    TipoAssento tipoAssento = new TipoAssento(0, descricaoTipoAssento, statusTipoAssento);
+                    Assento novoAssento = new Assento(idAssento, tipoAssento);
+                    
+                    if (assentoHandler.cadastrar(novoAssento)) {
+                        System.out.println("Assento cadastrado com sucesso!");
+                    } else {
+                        System.out.println("Erro ao cadastrar o assento.");
+                    }
+                }
+                case 2 -> {
+                    System.out.println("\nLista de Assentos:");
+                    for (Assento a : assentoHandler.listar()) {
+                        System.out.println(a);
+                    }
+                }
+                case 3 -> {
+                    System.out.print("Digite o ID do Assento para consulta: ");
+                    int idAssento = scanner.nextInt();
+                    scanner.nextLine();
+    
+                    Assento assentoConsultado = assentoHandler.consultar(idAssento);
+                    if (assentoConsultado != null) {
+                        System.out.println(assentoConsultado);
+                    } else {
+                        System.out.println("Assento não encontrado.");
+                    }
+                }
+                case 4 -> {
+                    System.out.print("ID do Assento a editar: ");
+                    int idAssento = scanner.nextInt();
+                    scanner.nextLine();
+    
+                    Assento assentoExistente = assentoHandler.consultar(idAssento);
+                    if (assentoExistente == null) {
+                        System.out.println("Assento não encontrado.");
+                        break;
+                    }
+    
+                    System.out.println("Assento atual: " + assentoExistente);
+    
+                    System.out.print("Nova descrição do tipo de assento: ");
+                    String novaDescricao = scanner.nextLine();
+    
+                    System.out.print("Novo status do tipo de assento: ");
+                    String novoStatus = scanner.nextLine();
+    
+                    TipoAssento novoTipoAssento = new TipoAssento(0, novaDescricao, novoStatus);
+                    Assento assentoEditado = new Assento(idAssento, novoTipoAssento);
+                    
+                    if (assentoHandler.editar(assentoEditado)) {
+                        System.out.println("Assento editado com sucesso!");
+                    } else {
+                        System.out.println("Erro ao editar o assento.");
+                    }
+                }
+                case 5 -> assentoMenu = false;
+                default -> System.out.println("Opção inválida! Tente novamente.");
+            }
+        }
+    }
+    
 }
+
