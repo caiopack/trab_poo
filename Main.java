@@ -12,7 +12,8 @@ public class Main {
             System.out.println("3. Gerenciar Atores");
             System.out.println("4. Gerenciar Salas");
             System.out.println("5. Gerenciar Assentos");
-            System.out.println("6. Sair");
+            System.out.println("6. Gerenciar Tipos de Assento");
+            System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             int menuOption = scanner.nextInt();
             scanner.nextLine();
@@ -23,7 +24,8 @@ public class Main {
                 case 3 -> gerenciarAtor(scanner);
                 case 4 -> gerenciarSala(scanner);
                 case 5 -> gerenciarAssento(scanner);
-                case 6 -> running = false;
+                case 6 -> gerenciarTipoAssento(scanner);
+                case 7 -> running = false;
                 default -> System.out.println("Opção inválida! Tente novamente.");
             }
         }
@@ -457,6 +459,93 @@ public class Main {
             }
         }
     }
+
+    private static void gerenciarTipoAssento(Scanner scanner) {
+        boolean tipoAssentoMenu = true;
+        while (tipoAssentoMenu) {
+            System.out.println("\nGerenciamento de Tipo de Assento:");
+            System.out.println("1. Inserir Tipo de Assento");
+            System.out.println("2. Listar Tipos de Assento");
+            System.out.println("3. Consultar Tipo de Assento");
+            System.out.println("4. Editar Tipo de Assento");
+            System.out.println("5. Voltar");
+            System.out.print("Escolha uma opção: ");
+            int tipoAssentoOption = scanner.nextInt();
+            scanner.nextLine(); // Limpa o buffer
+    
+            TipoAssento tipoAssentoHandler = new TipoAssento(0, "", "");
+    
+            switch (tipoAssentoOption) {
+                case 1 -> {
+                    System.out.print("ID do Tipo de Assento: ");
+                    int idTipoAssento = scanner.nextInt();
+                    scanner.nextLine();
+    
+                    System.out.print("Descrição: ");
+                    String descricao = scanner.nextLine();
+    
+                    System.out.print("Status: ");
+                    String status = scanner.nextLine();
+    
+                    TipoAssento novoTipoAssento = new TipoAssento(idTipoAssento, descricao, status);
+                    if (tipoAssentoHandler.cadastrar(novoTipoAssento)) {
+                        System.out.println("Tipo de Assento cadastrado com sucesso!");
+                    } else {
+                        System.out.println("Erro ao cadastrar Tipo de Assento.");
+                    }
+                }
+                case 2 -> {
+                    System.out.println("\nLista de Tipos de Assento:");
+                    for (TipoAssento ta : tipoAssentoHandler.listar()) {
+                        System.out.println(ta);
+                    }
+                }
+                case 3 -> {
+                    System.out.print("ID do Tipo de Assento para consulta: ");
+                    int idTipoAssento = scanner.nextInt();
+                    scanner.nextLine();
+    
+                    TipoAssento tipoAssentoConsultado = tipoAssentoHandler.consultar(idTipoAssento);
+                    if (tipoAssentoConsultado != null) {
+                        System.out.println(tipoAssentoConsultado);
+                    } else {
+                        System.out.println("Tipo de Assento não encontrado.");
+                    }
+                }
+                case 4 -> {
+                    System.out.print("ID do Tipo de Assento a editar: ");
+                    int idTipoAssento = scanner.nextInt();
+                    scanner.nextLine();
+    
+                    TipoAssento tipoAssentoExistente = tipoAssentoHandler.consultar(idTipoAssento);
+                    if (tipoAssentoExistente == null) {
+                        System.out.println("Tipo de Assento não encontrado.");
+                        break;
+                    }
+    
+                    System.out.println("Tipo de Assento atual: " + tipoAssentoExistente);
+    
+                    System.out.print("Nova descrição (ou Enter para manter): ");
+                    String novaDescricao = scanner.nextLine();
+                    novaDescricao = novaDescricao.isEmpty() ? tipoAssentoExistente.getDescricao() : novaDescricao;
+    
+                    System.out.print("Novo status (ou Enter para manter): ");
+                    String novoStatus = scanner.nextLine();
+                    novoStatus = novoStatus.isEmpty() ? tipoAssentoExistente.getStatus() : novoStatus;
+    
+                    TipoAssento tipoAssentoEditado = new TipoAssento(idTipoAssento, novaDescricao, novoStatus);
+                    if (tipoAssentoHandler.editar(tipoAssentoEditado)) {
+                        System.out.println("Tipo de Assento editado com sucesso!");
+                    } else {
+                        System.out.println("Erro ao editar Tipo de Assento.");
+                    }
+                }
+                case 5 -> tipoAssentoMenu = false;
+                default -> System.out.println("Opção inválida! Tente novamente.");
+            }
+        }
+    }
+    
     
 }
 
